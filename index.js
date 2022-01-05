@@ -52,6 +52,10 @@ app.delete('/api/persons/:id', (request, response) => {
     response.status(204).end();
 });
 
+const generateId = () => {
+    return Math.floor(Math.random() * 9999999);
+};
+
 app.post('/api/persons', (request, response) => {
     const body = request.body;
 
