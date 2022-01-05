@@ -61,6 +61,24 @@ const generateId = () => {
 app.post('/api/persons', (request, response) => {
     const body = request.body;
 
+    if (!body.name) {
+        return response.status(400).json({
+            error: 'name is missing'
+        });
+    }
+
+    if (persons.filter(person => person.name.toLowerCase() === body.name.toLowerCase()).length > 0) {
+        return response.status(400).json({
+            error: 'name must be unique'
+        });
+    }
+
+    if (!body.number) {
+        return response.status(400).json({
+            error: 'number is missing'
+        });
+    }
+
     const newPerson = {
         id: generateId(),
         name: body.name,
