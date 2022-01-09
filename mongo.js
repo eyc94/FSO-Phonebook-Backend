@@ -26,6 +26,16 @@ if (process.argv.length === 3) {
         });
         mongoose.connection.close();
     });
+} else if (process.argv.length < 6) {
+    const person = new Person({
+        name: process.argv[3];
+        number: process.argv[4];
+    });
+
+    person.save().then(result => {
+        console.log('person saved!');
+        mongoose.connection.close();
+    });
 }
 
 // Need conditional statement to handle empty name and number.
