@@ -20,9 +20,10 @@ const personSchema = new mongoose.Schema({
 const Person = mongoose.model('Person', personSchema);
 
 if (process.argv.length === 3) {
+    console.log('Phonebook:');
     Person.find({}).then(result => {
         result.forEach(person => {
-            console.log(person);
+            console.log(person.name, person.number);
         });
         mongoose.connection.close();
     });
@@ -37,7 +38,3 @@ if (process.argv.length === 3) {
         mongoose.connection.close();
     });
 }
-
-// Need conditional statement to handle empty name and number.
-// const name = process.argv[3];
-// const number = process.argv[4];
