@@ -44,7 +44,9 @@ let persons = [
 ];
 
 app.get('/api/persons', (request, response) => {
-    response.json(persons);
+    Person.find({}).then(persons => {
+        response.json(persons);
+    });
 });
 
 app.get('/info', (request, response) => {
