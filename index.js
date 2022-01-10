@@ -49,9 +49,9 @@ app.delete('/api/persons/:id', (request, response) => {
     response.status(204).end();
 });
 
-const generateId = () => {
-    return Math.floor(Math.random() * 9999999);
-};
+// const generateId = () => {
+//     return Math.floor(Math.random() * 9999999);
+// };
 
 app.post('/api/persons', (request, response) => {
     const body = request.body;
@@ -62,27 +62,26 @@ app.post('/api/persons', (request, response) => {
         });
     }
 
-    if (persons.filter(person => person.name.toLowerCase() === body.name.toLowerCase()).length > 0) {
-        return response.status(400).json({
-            error: 'name must be unique'
-        });
-    }
-
     if (!body.number) {
         return response.status(400).json({
             error: 'number is missing'
         });
     }
 
-    const newPerson = {
-        id: generateId(),
+    // if (persons.filter(person => person.name.toLowerCase() === body.name.toLowerCase()).length > 0) {
+    //     return response.status(400).json({
+    //         error: 'name must be unique'
+    //     });
+    // }
+
+    const newPerson = new Person({
         name: body.name,
         number: body.number
-    };
+    });
 
-    persons = persons.concat(newPerson);
-
-    response.json(newPerson);
+    newPerson.save().then(savedPerson => {
+        response.json(savedPerson);
+    })
 });
 
 const PORT = process.env.PORT || 3001;
