@@ -49,9 +49,9 @@ app.delete('/api/persons/:id', (request, response) => {
     response.status(204).end();
 });
 
-const generateId = () => {
-    return Math.floor(Math.random() * 9999999);
-};
+// const generateId = () => {
+//     return Math.floor(Math.random() * 9999999);
+// };
 
 app.post('/api/persons', (request, response) => {
     const body = request.body;
@@ -74,11 +74,10 @@ app.post('/api/persons', (request, response) => {
     //     });
     // }
 
-    const newPerson = {
-        id: generateId(),
+    const newPerson = new Person({
         name: body.name,
         number: body.number
-    };
+    });
 
     persons = persons.concat(newPerson);
 
