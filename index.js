@@ -79,9 +79,9 @@ app.post('/api/persons', (request, response) => {
         number: body.number
     });
 
-    persons = persons.concat(newPerson);
-
-    response.json(newPerson);
+    newPerson.save().then(savedPerson => {
+        response.json(savedPerson);
+    })
 });
 
 const PORT = process.env.PORT || 3001;
