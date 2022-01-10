@@ -1,13 +1,8 @@
 const mongoose = require('mongoose');
 
-if (process.argv.length < 3) {
-    console.log(
-        'Please provide the password as an argument: node mongo.js <password> or node mongo.js <password> <name> <number>'
-    );
-    process.exit(1);
-}
-
 const url = process.env.MONGODB_URI;
+
+console.log('connecting to', url);
 
 mongoose.connect(url);
 
