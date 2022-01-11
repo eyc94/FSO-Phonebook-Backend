@@ -26,6 +26,7 @@ app.get('/api/persons', (request, response) => {
     });
 });
 
+// Needed to change this in branch part3-18. I did this earlier.
 app.get('/info', (request, response) => {
     Person.countDocuments()
         .then(result => {
