@@ -6,8 +6,8 @@ const Person = require('./models/person');
 
 const app = express();
 
-app.use(express.json());
 app.use(express.static('build'));
+app.use(express.json());
 app.use(cors());
 
 // Part 3-7.
@@ -44,9 +44,10 @@ app.get('/api/persons/:id', (request, response) => {
 });
 
 app.delete('/api/persons/:id', (request, response) => {
-    const id = Number(request.params.id);
-    persons = persons.filter(person => person.id !== id);
-    response.status(204).end();
+    Person.findByIdAndRemove(request.params.id)
+        .then(result => {
+            response.status(204).end();
+        });
 });
 
 // const generateId = () => {
