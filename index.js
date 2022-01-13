@@ -15,7 +15,7 @@ app.use(cors());
 
 // Part 3-8.
 morgan.token('payload', (req, res) => {
-    return JSON.stringify(req.body)
+    return JSON.stringify(req.body);
 });
 
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :payload'));
